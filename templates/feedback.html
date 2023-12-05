@@ -1,0 +1,22 @@
+<div>
+    Greetings,
+   
+    {% if session['role'] == 'ADMIN' %}
+        <p>Welcome, Admin!</p>    
+    {% else %}
+        <p>Here is your feedback from admin,</p>
+    {% endif %}
+    
+    <!-- <div style="background-color: #f44336!important;color:white;"> -->
+        <i>
+            <b>
+                {% for i in result: %}
+                <div>
+                    {{i.feedback}}
+                </div>
+                {% endfor %}
+            </b>
+            
+        </i>
+    <!-- </div> -->
+</div>

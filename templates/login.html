@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <title>Login to Skyline Residence</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    
+    <style>
+        .roundedEdge {
+        border-radius:.25rem !important
+        }
+
+        .form-rounded {
+            border-radius: 1rem;
+            }
+
+        
+    </style>
+
+</head>
+<body style="background-color: #F0F0F0;">
+    <br/>   
+        <div class="login-page" style="margin: 3em;">
+            <div class="container rounded">
+                <div class="row">
+                    <div class="col-lg-10 offset-lg-1">
+                      <!-- <h3 class="mb-3" >Skyline Residence Management System</h3> -->
+                        <div class="bg-white shadow " style="max-width: 800px;height: 300px;">
+                            <div class="row">
+                                <div class="col-md-7 pe-0">
+                                    <div class="form-left h-100 py-5 px-5" style="background-color: white;">
+                                        <form method="POST">
+                                            <div class="form-group">
+                                              <label for="email" class="h6 sky-red" style="color: #F88379;">USERNAME</label>
+                                              <input type="text" name="uname" style="background-color: #F0F0F0;" class="form-control form-rounded" id="uname">
+                                            </div>
+                                            <br/>
+                                            <div class="form-group">
+                                              <label for="email" class="h6" style="color: #F88379;">PASSWORD</label>
+                                              <input type="password" name="passw" style="background-color: #F0F0F0;" class="form-control form-rounded" id="passw">
+                                            </div>
+                                            <div style="margin-top:0.8em;width: 120px;">
+                                                <button type="submit" style="background-color: #F88379;" class="btn form-control btn-light form-rounded">Login</button>
+                                            </div>
+                                            
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 ps-0 d-none d-md-block" style="background-color: #F88379;">
+                                    <div class="form-right h-100 text-white text-center pt-5" style="background-color: #F88379;">
+                                        <i class="bi bi-bootstrap"></i>
+                                        <p class="h3">Skyline Residence Management System
+                                        </p>
+                                        <br/>
+                                        <p class="h4">
+                                            Welcome to Login                                            
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

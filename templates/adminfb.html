@@ -1,0 +1,19 @@
+
+<div>
+    Greetings,
+   
+    {% if session['role'] == 'ADMIN' %}
+        <p>Welcome, Admin!</p>    
+    {% else %}
+        <p>Please provide your feedback here,</p>
+    {% endif %}
+    
+    <div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="feedback" class="font-weight-bold">Give Feedback:</label>
+                <textarea class="form-control" id="txtfeedback" rows="5" placeholder="Type your feedback here..."></textarea>
+            </div>
+        </div>
+    </div>
+</div>

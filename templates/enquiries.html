@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Enquiries</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/static/css/scust.css">
+  <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="/static/js/bootstrap.min.js"></script>
+
+  <style>
+    .roundedEdge {
+      border-radius: .25rem !important
+    }
+
+    .header-row {
+      background-color: rgba(255, 0, 0, 0.5);
+      color: white;
+      height: 30px;
+    }
+
+    /* .thinred-border {
+            border: 1px solid rgba(255, 0, 0, 0.5); 
+        } */
+  </style>
+
+</head>
+
+<body>
+  <br />
+  <!-- Sidebar/menu -->
+  <nav class="sky-sidebar sky-red sky-collapse sky-top sky-large sky-padding"
+    style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
+    <a href="javascript:void(0)" onclick="sky_close()" class="sky-button sky-hide-large sky-display-topleft"
+      style="width:100%;font-size:22px">Close Menu</a>
+    <div class="sky-container">
+      <h3 class="sky-padding-24"><b>Skyline Residence Services</b></h3>
+    </div>
+    <div class="sky-bar-block">
+      <a href="/home" onclick="sky_close()" class="sky-bar-item sky-button sky-hover-white">Home</a>
+      <a href="/profile" onclick="sky_close()" class="sky-bar-item sky-button sky-hover-white">Profile</a>
+      <a href="/enquiries" onclick="sky_close()" class="sky-bar-item sky-button sky-hover-white"
+        style=" color: red!important; background-color: #fff!important;">Enquiries</a>
+      <!-- <a href="/request" onclick="sky_close()" class="sky-bar-item sky-button sky-hover-white">Request</a> -->
+      {% if session['role'] == 'ADMIN' %}
+      <a href="/managedata" onclick="sky_close()" class="sky-bar-item sky-button sky-hover-white">Manage Data</a>
+      {% else %}
+         <p></p>
+      {% endif %}
+      
+    </div>
+  </nav>
+
+  <!-- Top menu on small screens -->
+  <header class="sky-container sky-top sky-hide-large sky-red sky-xlarge sky-padding">
+    <a href="javascript:void(0)" class="sky-button sky-red sky-margin-right" onclick="sky_open()">☰</a>
+    <span>Skyline Residence</span>
+  </header>
+  <div class="sky-main" style="margin-left:340px;margin-right:40px">
+    <div style="align-items: center;">
+      <div style="margin-left: 48em;margin-top: 1em;" title="{{session.name}}">
+        <!-- Logged in : <strong> {{session.name}}</strong> -->
+        <button style="background-color: #f44336!important;" onclick="window.location.href = '/profile';" class="btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person"
+            viewBox="0 0 16 16">
+            <path
+              d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664z" />
+          </svg>
+        </button>
+        |
+        <button type="button" class="btn btn-primary" onclick="window.location.href = '/logout';"
+          style="background-color: #f44336!important;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+            class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+            <path fill-rule="evenodd"
+              d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z" />
+          </svg>
+          Logout
+        </button>
+      </div>
+    </div>
+    <br />
+    <div class="sky-container" style="margin-top:10px" id="divWelcome">
+      <h3 class="w6-xxxlarge sky-text-red"><b> My Enquiries </b></h3>
+      <hr style="width:50px;border:5px solid red" class="sky-round">
+      <!-- <table border=1>
+                <thead>
+                    <tr>
+                        {% for i in headers: %}
+                        <th>
+                            {{i}}
+                        </th>
+                        {% endfor %}
+                    </tr>
+                </thead>
+        
+                <tbody>
+                    {% for i in result: %}
+        
+                    <tr>
+                        <td> {{ i.details }} </td>
+                        <td> {{ i.subject }} </td>
+                        <td> {{ i.req_type }} </td>
+                        <td> {{ i.work_type }} </td>
+                        <td> {{ i.v_name }} </td>
+        
+                    </tr>
+        
+                    {% endfor %}
+                </tbody>
+        
+            </table>  -->
+
+      <!-- <header class="container">
+                <div class="row">
+                    <div class="col">
+                        <h1 class="mt-3">Header</h1>
+                    </div>
+                </div>
+            </header>         -->
+      <button type="button" class="btn btn-outline-danger" style="background-color: #f44336!important; color:white;"
+        data-bs-toggle="modal" data-bs-target="#myModalEnqu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square"
+          viewBox="0 0 16 16">
+          <path
+            d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z">
+          </path>
+          <path
+            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4">
+          </path>
+        </svg>
+        Add New
+      </button>
+
+      <div class="container mt-4" id="divEnqGrid"> <!-- Content with Bootstrap Grid -->
+        <div class="row header-row">
+          <div class="col-md-2 border">
+            <strong>Req. Date</strong>
+          </div>
+          <div class="col-md-2 border">
+            <strong>Subject</strong>
+          </div>
+          <div class="col-md-4 border">
+            <strong>Description</strong>
+          </div>
+          <div class="col-md-2 border">
+            <strong>Type</strong>
+          </div>
+          <div class="col-md-2 border">
+            <strong>Status</strong>
+          </div>
+        </div>
+        <div class="row">
+
+          {% for i in result: %}
+          <div class="col-md-2 border">
+            {{ i.req_dt }}
+          </div>
+          <div class="col-md-2 border">
+            {{ i.subject }}
+          </div>
+          <div class="col-md-4 border">
+            {{ i.details }}
+          </div>
+          <div class="col-md-2 border">
+
+            {% if i.req_type == 1 %}
+               <p>GENERAL ENQUIRY</p>
+            {% elif i.req_type == 2 %}
+                <p>COMPLAINT</p>
+            {% endif %}
+
+          </div>
+          <div class="col-md-2 border">
+            <button type="button" class="btn btn-outline-danger"
+              style="background-color: #f44336!important; color:white;" data-bs-toggle="modal"
+              data-bs-target="#modalFeedback" uniqueid="{{i.id}}" onclick="GetFeedback('{{i.id}}');" >
+              {{ i.status }}
+            </button>
+          </div>
+          {% endfor %}
+        </div>
+        <!-- End Body Rows with Columns -->
+
+      </div>
+      <br />
+      <br />
+      <br />
+      <!-- The Modal -->
+      <div class="modal" id="myModalEnqu">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h4 class="modal-title">Add New Enquiry</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="POST" id="enqform">
+              <div class="modal-body">
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="type" class="font-weight-bold">Type</label>
+                  </div>
+                  <div class="form-group col-md-8">
+                    <select class="form-control" name="drpType" id="drpType" required>
+                      <option value="">Select type</option>
+                      <option value="1">General Enquiry</option>
+                      <option value="2">Complaint</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="subject" class="font-weight-bold">Subject</label>
+                  </div>
+                  <div class="form-group col-md-8">
+                    <input type="text" name="txtsubject" class="form-control" id="txtsubject"
+                      placeholder="Enter subject" required>
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-4">
+                    <label for="description" class="font-weight-bold">Description</label>
+                  </div>
+                  <div class="form-group col-md-8">
+                    <textarea class="form-control" name="txtDesc" id="txtDesc" rows="5" placeholder="Enter description"
+                      required></textarea>
+                  </div>
+                </div>
+              </div>
+            </form>
+
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button class="btn btn-primary" id="submitBtn" onclick="performPost()">Submit</button>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="modal" id="modalFeedback">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h4 class="modal-title">Feedback from Admin</h4>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form method="POST" id="feedbackfrm">
+              <div class="modal-body">
+                <div id="divfb">
+
+                </div>
+              </div>
+            </form>
+            <!-- Modal footer -->
+            <div class="modal-footer">              
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+</html>
+
+
+<script>
+ function GetFeedback(id) {
+    
+    $.ajax({
+      url: "{{ url_for('feedbackview') }}",
+      type: "GET",
+      data: { "des": id },
+      success: function (dafta) {
+        $('#divfb').html(dafta);
+      }
+    });
+  }
+
+  function RefreshGrid() {
+    //alert('fsdfsdfsd');
+    $.ajax({
+      url: "{{ url_for('check') }}",
+      type: "GET",
+      success: function (data) {
+        //alert('hi');
+        $('#divEnqGrid').html(data);
+      }
+    });
+  }
+
+  function performPost() {
+    event.preventDefault();
+    var frmDt = JSON.stringify($("#enqform").serializeArray());
+    console.log(frmDt);
+
+    var rtype = document.getElementById("drpType").value;
+    var sub = document.getElementById("txtsubject").value;
+    var desc = document.getElementById("txtDesc").value;
+
+    var dtForm = { "des": desc, "subj": sub, "enqtype": rtype };
+    //console.log(dtForm);
+
+    $.ajax({
+      type: "POST",
+      url: "{{ url_for('check') }}",
+      data: { "des": desc, "subj": sub, "enqtype": rtype },
+      success: function (response) {
+        // Handle success
+        console.log(response);
+        RefreshGrid();
+        document.getElementById("drpType").value='';
+        document.getElementById("txtsubject").value = '';
+        document.getElementById("txtDesc").value ='';
+        $("#myModalEnqu").modal("hide");
+      },
+      error: function (error) {
+        alert(error);
+        // Handle error
+        console.error(error);
+      }
+    });
+  }
+</script>

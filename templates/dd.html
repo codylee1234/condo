@@ -1,0 +1,51 @@
+<div class="container mt-4" id="divEnqGrid"> <!-- Content with Bootstrap Grid -->
+  <div class="row header-row">
+    <div class="col-md-2 border">
+      <strong>Req. Date</strong>
+    </div>
+    <div class="col-md-2 border">
+      <strong>Subject</strong>
+    </div>
+    <div class="col-md-4 border">
+      <strong>Description</strong>
+    </div>
+    <div class="col-md-2 border">
+      <strong>Type</strong>
+    </div>
+    <div class="col-md-2 border">
+      <strong>Status</strong>
+    </div>
+  </div>
+  <div class="row">
+
+    {% for i in result: %}
+    <div class="col-md-2 border">
+      {{ i.req_dt }}
+    </div>
+    <div class="col-md-2 border">
+      {{ i.subject }}
+    </div>
+    <div class="col-md-4 border">
+      {{ i.details }}
+    </div>
+    <div class="col-md-2 border">
+
+      {% if i.req_type == 1 %}
+         <p>GENERAL ENQUIRY</p>
+      {% elif i.req_type == 2 %}
+          <p>COMPLAINT</p>
+      {% endif %}
+
+    </div>
+    <div class="col-md-2 border">
+      <button type="button" class="btn btn-outline-danger"
+        style="background-color: #f44336!important; color:white;" data-bs-toggle="modal"
+        data-bs-target="#modalFeedback" uniqueid="{{i.id}}" onclick="GetFeedback('{{i.id}}');" >
+        {{ i.status }}
+      </button>
+    </div>
+    {% endfor %}
+  </div>
+  <!-- End Body Rows with Columns -->
+
+</div>
