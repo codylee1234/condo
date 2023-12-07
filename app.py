@@ -11,8 +11,8 @@ from lmenu import lmenu_bp
 
 app = Flask(__name__)
 app.secret_key = 'ABCD1234ABCD'
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:Destiny10!@localhost:5432/postgres"
-#app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://manipazhani:oqg1pUcn2RTA@ep-ancient-poetry-05143267.ap-southeast-1.aws.neon.tech/condo?sslmode=require"
+#app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:Destiny10!@localhost:5432/postgres"
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://manipazhani:oqg1pUcn2RTA@ep-ancient-poetry-05143267.ap-southeast-1.aws.neon.tech/condo?sslmode=require"
 #db = SQLAlchemy(app)
 db.init_app(app)
 
